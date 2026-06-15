@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="header">
+        <div>
+            <h1>Users</h1>
+            <p>Review and manage all user accounts in your community.</p>
+        </div>
+        <button class="btn-add">+ Add New User</button>
+    </div>
+
+    <div class="cards-container">
+        <div class="card">
+            <div class="value" id="totalUsersCard">0</div>
+            <div class="label">Total Users</div>
+        </div>
+        <div class="card">
+            <div class="value" id="dynamicFilterCard">0</div>
+            <div class="label" id="dynamicFilterLabel">Filtered Results</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="table-header">
+            <div>
+                <span class="sub-title">USERS LIST</span>
+                <h2>Active accounts</h2>
+            </div>
+            <div class="filters">
+                <select id="monthFilter">
+                    <option value="all">All Months</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                </select>
+                <select id="genderFilter">
+                    <option value="all">All Genders</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
