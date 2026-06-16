@@ -46,6 +46,12 @@ const totalUsersCard = document.getElementById('totalUsersCard');
 const dynamicFilterCard = document.getElementById('dynamicFilterCard');
 const dynamicFilterLabel = document.getElementById('dynamicFilterLabel');
 
+// Modal Elements
+const modal = document.getElementById('userModal');
+const openModalBtn = document.getElementById('openModalBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+const userForm = document.getElementById('userForm');
+
 // Initialize the primary baseline total user metric
 totalUsersCard.textContent = usersData.length;
 
@@ -107,6 +113,75 @@ function updateDashboardView() {
     
     dynamicFilterLabel.textContent = cardLabelText;
 }
+
+// ---------- ADD NEW USER FUNCTIONALITY ----------
+
+// Open modal
+openModalBtn.addEventListener('click', function() {
+    modal.style.display = 'flex';
+});
+
+// Close modal functions
+function closeModal() {
+    modal.style.display = 'none';
+    userForm.reset();
+}
+
+cancelBtn.addEventListener('click', closeModal);
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+// Handle form submission - Add New User
+userForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+    
+    // Validate required fields
+    if (!firstName || !lastName || !username || !email || !phone || !dob || !gender) {
+        alert('Please fill in all fields.');
+        return;
+    }
+    
+    // Create new user object
+    const newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        phone: phone,
+        dob: dob,
+        gender: gender,
+        createdAt: new Date().toISOString()
+    };
+    
+    // Add to usersData array
+    usersData.push(newUser);
+    
+    // Update total users card
+    totalUsersCard.textContent = usersData.length;
+    
+    // Refresh the table view
+    updateDashboardView();
+    
+    // Show success message
+    alert(`User "${firstName} ${lastName}" added successfully!`);
+    
+    // Close modal and reset form
+    closeModal();
+});
 
 // Add event handlers looking out for drop down updates
 monthFilter.addEventListener('change', updateDashboardView);
