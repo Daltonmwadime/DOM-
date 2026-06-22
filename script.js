@@ -4,8 +4,12 @@ const monthFilter = document.getElementById('monthFilter');
 const genderFilter = document.getElementById('genderFilter');
 const totalUsersCard = document.getElementById('totalUsersCard');
 const dynamicFilterCard = document.getElementById('dynamicFilterCard');
+<<<<<<< HEAD
 const dynamicFilterLabel = document.getElementById('dynamicFilterLabel');
 const paginationControls = document.getElementById('paginationControls');
+=======
+const dynamicFilterLabel = document.getElementById('dynamicFilterLabel'); 
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
 
 // Modal Elements
 const modal = document.getElementById('userModal');
@@ -16,10 +20,13 @@ const userForm = document.getElementById('userForm');
 // This now holds whatever comes back from the API
 let usersData = [];
 
+<<<<<<< HEAD
 // ---------- PAGINATION STATE ----------
 let currentPage = 1;
 const rowsPerPage = 10; // Change this to show more/fewer rows per page
 
+=======
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
 // Fetch users from the backend
 async function fetchUsers() {
     try {
@@ -31,15 +38,25 @@ async function fetchUsers() {
 
         const result = await response.json();
 
+<<<<<<< HEAD
         usersData = Array.isArray(result) ? result : (result.data || result.users || []);
 
+=======
+        // Handle either a raw array response, or a wrapped { data: [...] } shape
+        usersData = Array.isArray(result) ? result : (result.data || result.users || []);
+
+        // Now that data has arrived, set the baseline total and render the table
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
         totalUsersCard.textContent = usersData.length;
         updateDashboardView();
 
     } catch (error) {
         console.error('Failed to fetch users:', error);
         tableBody.innerHTML = `<tr><td colspan="8" class="no-records">Failed to load users. Please try again later.</td></tr>`;
+<<<<<<< HEAD
         paginationControls.innerHTML = '';
+=======
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
     }
 }
 
@@ -55,10 +72,33 @@ function updateDashboardView() {
         return isMonthMatch && isGenderMatch;
     });
 
+<<<<<<< HEAD
     // Reset to page 1 whenever filters change so we don't land on an empty page
     currentPage = 1;
 
     renderTablePage(matchingRecords);
+=======
+    tableBody.innerHTML = '';
+
+    if (matchingRecords.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="8" class="no-records">No users matched your filter criteria.</td></tr>`;
+    } else {
+        matchingRecords.forEach(user => {
+            const tableRow = document.createElement('tr');
+            tableRow.innerHTML = `
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td><strong>${user.username}</strong></td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${user.dob}</td>
+                <td>${user.gender.toLowerCase()}</td>
+                <td>${user.createdAt}</td>
+            `;
+            tableBody.appendChild(tableRow);
+        });
+    }
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
 
     dynamicFilterCard.textContent = matchingRecords.length;
 
@@ -77,6 +117,7 @@ function updateDashboardView() {
     dynamicFilterLabel.textContent = cardLabelText;
 }
 
+<<<<<<< HEAD
 // ---------- PAGINATION-AWARE TABLE RENDER ----------
 function renderTablePage(matchingRecords) {
     tableBody.innerHTML = '';
@@ -154,6 +195,8 @@ function renderPagination(matchingRecords, totalPages) {
     paginationControls.appendChild(nextBtn);
 }
 
+=======
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
 // ---------- ADD NEW USER FUNCTIONALITY ----------
 
 openModalBtn.addEventListener('click', function() {
@@ -205,5 +248,10 @@ userForm.addEventListener('submit', function(e) {
 monthFilter.addEventListener('change', updateDashboardView);
 genderFilter.addEventListener('change', updateDashboardView);
 
+<<<<<<< HEAD
 // Kick things off by fetching from the backend
 fetchUsers();
+=======
+// Kick things off by fetching from the backend instead of rendering hardcoded data
+fetchUsers();
+>>>>>>> 6951f0a10bf30c4f58f07e7811ed2685f8ff94ef
