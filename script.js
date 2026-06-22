@@ -4,7 +4,7 @@ const monthFilter = document.getElementById('monthFilter');
 const genderFilter = document.getElementById('genderFilter');
 const totalUsersCard = document.getElementById('totalUsersCard');
 const dynamicFilterCard = document.getElementById('dynamicFilterCard');
-const dynamicFilterLabel = document.getElementById('dynamicFilterLabel');
+const dynamicFilterLabel = document.getElementById('dynamicFilterLabel'); 
 
 // Modal Elements
 const modal = document.getElementById('userModal');
